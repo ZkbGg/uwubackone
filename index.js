@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-
+const cors = require('cors');
 
 // Cargar variables de entorno
 dotenv.config();
@@ -30,3 +30,6 @@ const logRoute = require('./routes/log');
 app.use('/api/log', logRoute);
 
 app.listen(PORT, () => console.log(`Servidor funcionando en el puerto ${PORT}`));
+
+app.use(cors({
+    origin: 'https://uwufront.onrender.com'}));
