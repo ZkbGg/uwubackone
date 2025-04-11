@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = require('../middleware/auth');
-const Log = require('../models/Log');
+const { create } = require('../models/Log');
 
 router.post('/', auth, async (req, res) => {
   const { log } = req.body;
@@ -13,7 +13,7 @@ router.post('/', auth, async (req, res) => {
   }
 
   try {
-    await Log.create({ usuario: usuarioFinal, mensaje: log });
+    await create({ usuario: usuarioFinal, mensaje: log });
     res.status(200).json({ message: '✅ Log guardado en base de datos' });
   } catch (err) {
     console.error('❌ Error al guardar log en DB:', err);
