@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // 🟢 Definir rutas
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/personas', require('./routes/personas'));
-app.use('/api/log', require('./routes/log').default);
+app.use('/api/log', require('./routes/log'));
 
 // 🟢 Arrancar el servidor
 const PORT = process.env.PORT || 5000;

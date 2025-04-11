@@ -26,7 +26,7 @@ app.use('/api/personas', personasRoute);
 
 const PORT = process.env.PORT || 5000;
 
-const logRoute = require('./routes/log').default;
+const logRoute = require('./routes/log');
 app.use('/api/log', logRoute);
 
 app.listen(PORT, () => console.log(`Servidor funcionando en el puerto ${PORT}`));
