@@ -11,25 +11,22 @@ connectDB();
 
 const app = express();
 
-// Middleware para procesar datos en formato JSON
-app.use(express.json());
+// 🟢 Configurar CORS antes que cualquier ruta o middleware
+app.use(cors({
+  origin: 'https://uwufront.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-auth-token'],
+}));
 
-// Aumentar límite de headers
+// 🟢 Middleware para procesar datos en formato JSON y formularios grandes
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Definir rutas
+// 🟢 Definir rutas
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/personas', require('./routes/personas'));
+app.use('/api/log', require('./routes/log'));
 
-const personasRoute = require('./routes/personas');
-app.use('/api/personas', personasRoute);
-
+// 🟢 Arrancar el servidor
 const PORT = process.env.PORT || 5000;
-
-const logRoute = require('./routes/log');
-app.use('/api/log', logRoute);
-
 app.listen(PORT, () => console.log(`Servidor funcionando en el puerto ${PORT}`));
-
-app.use(cors({
-    origin: 'https://uwufront.onrender.com'}));
